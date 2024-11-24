@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Echo - Wing a Tune</title>
+  <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'poppins', sans-serif;
+      background-color: #202020;
+      color: white;
+      text-align: center;
+      padding-bottom: 100px;
+    }
+
+    header {
+      background-color: #202020;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      border-bottom: 2px solid #6c63ff;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    header .logo img {
+      height: 40px;
+      width: 40px;
+      margin-right: 15px;
+      border-radius: 50%;
+    }
+
+    header h1 {
+      font-size: 24px;
+      margin: 0;
+      font-family: 'Georgia', serif;
+    }
+
+    .textLogo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .textLogo p {
+      font-size: 10px;
+      color: #ffffffb1;
+    }
+
+    /* Main Section */
+
+    .circle {
+      position: absolute;
+      z-index: -2;
+      left: -100px;
+      top: 20px;
+      height: 200px;
+      width: 200px;
+      background-color: #6c63ff;
+      border-radius: 50%;
+      filter: blur(100px);
+    }
+
+    .container {
+      text-align: center;
+      margin: 50px auto;
+    }
+
+    .container h2 {
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.768);
+      text-shadow: 0 0 10px #6c63ff;
+      margin-bottom: 20px;
+      text-align: left;
+      width: 80%;
+      margin-left: 10%;
+    }
+
+    .music-list {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .music-list .song {
+      position: relative;
+      width: 80%;
+      max-width: 500px;
+      padding: 15px;
+      background-color: #2b2b2b;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      overflow: hidden;
+      border: 1px solid transparent;
+      z-index: 0;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .music-list .song::before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      bottom: -90px;
+      left: 0;
+      border-radius: 50%;
+      filter: blur(80px);
+      background-color: transparent;
+      position: absolute;
+      transition: all 0.3s ease;
+      z-index: -1;
+    }
+
+    .music-list .song:hover::before {
+      background-color: #6b63ff97;
+    }
+
+    .music-list .song:hover {
+      border: 1px solid #6c63ff;
+    }
+
+    .music-list .song img {
+      position: relative;
+      height: 70px;
+      border-radius: 5px;
+      z-index: 1;
+    }
+
+    .music-list .song h3 {
+      position: relative;
+      font-size: 18px;
+      z-index: 1;
+    }
+
+    .music-list .song p {
+      position: relative;
+      font-size: 14px;
+      color: #ccc;
+      z-index: 1;
+    }
+
+    .music-list .song .titleArtist {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    /* Audio Player */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #3b3b3b;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid #3b3b3b;
+    }
+
+    footer audio {
+      width: 90%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="logo"><img src="https://i.ibb.co/DzSZSZg/IMG-20241111-WA0007.jpg" alt="Logo">
+      <div class="textLogo">
+        <h1>EchoMusic</h1>
+        <p>Wing a tune, on your mood</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="circle"></div>
+    <h2>Your song library</h2>
+    <div class="music-list">
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 1</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 2</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+      <div class="song" onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+        <img src="https://via.placeholder.com/200x200" alt="Song Cover">
+        <div class="titleArtist">
+          <h3>Song Title 3</h3>
+          <p>Artist Name</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio Player -->
+  <footer>
+    <audio id="audio-player" controls></audio>
+  </footer>
+
+  <script>
+    // Play selected song
+    function playSong(url) {
+      const audioPlayer = document.getElementById('audio-player');
+      audioPlayer.src = url;
+      audioPlayer.play();
+    }
+  </script>
+</body>
+
+</html>
